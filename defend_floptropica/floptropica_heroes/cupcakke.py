@@ -7,4 +7,5 @@ class Cupcakke(base_character.BaseCharacter):
         self.movement = 3
         self.health = 1000
         self.energy = 1000
-        self.abilityMenu = {
+        # ToDo: define unique abilities for Cupcakke
+        # self.abilityMenu = []
