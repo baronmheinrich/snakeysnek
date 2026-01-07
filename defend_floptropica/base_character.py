@@ -1,9 +1,15 @@
 # defining a base character class to use for inheritance.
 # this class will contain common attributes and methods for all characters in the game.
+import base_abilities
 
 class BaseCharacter:
-    def __init__(self, name="Dummy", movement=1, health=1000, energy=1000, abilityMenu={"attack1": [0, 0], "attack2": [0, 0], "attack3": [0, 0], "attack4": [0, 0]}):
+    ability1 = base_abilities.Abilities()
+    ability2 = base_abilities.Abilities()
+    ability3 = base_abilities.Abilities()
+    ability4 = base_abilities.Abilities()
+    def __init__(self, name="Dummy", imagePath=None, movement=1, health=1000, energy=1000, abilityMenu=[ability1, ability2, ability3, ability4]):
         self.name = name
+        self.imagePath = imagePath
         self.movement = movement
         self.health = health
         self.energy = energy
