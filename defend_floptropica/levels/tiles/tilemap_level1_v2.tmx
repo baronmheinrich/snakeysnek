@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="10" height="10" tilewidth="62" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="tileset_png.tsx"/>
+ <layer id="4" name="polluted" width="10" height="10">
+  <data encoding="csv">
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <layer id="1" name="healthy" width="10" height="10">
+  <data encoding="csv">
+2,2,2,2,2,2,2,2,6,6,
+7,7,7,7,7,7,7,7,6,6,
+3,3,6,6,6,6,6,6,6,6,
+6,6,6,6,6,6,6,6,6,6,
+6,6,6,6,6,6,6,6,6,6,
+6,6,6,6,6,6,6,6,6,6,
+6,6,6,6,6,6,6,6,6,6,
+3,3,6,6,6,6,6,6,6,6,
+7,7,7,7,7,7,7,7,6,6,
+2,2,2,2,2,2,2,2,6,6
+</data>
+ </layer>
+</map>
