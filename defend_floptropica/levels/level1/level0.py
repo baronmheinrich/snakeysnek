@@ -28,6 +28,9 @@ def draw_tiles(screen, layer_name, tmx_data):
         iso_y = (x + y) * (TILE_WIDTH_HALF) + s_height + 20
         screen.blit(image, (iso_x, iso_y))
 
+# ToDo: Add tile highlight on mouseover
+# https://stackoverflow.com/questions/71592481/how-to-get-tile-selected-with-mouse
+
 
 while True:
     for event in pygame.event.get():
