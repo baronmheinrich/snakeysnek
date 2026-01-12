@@ -11,6 +11,9 @@
 
 # This was supposed to be used to highlight the tile the mouse is hovering over.
 # However, I don't think it is probable to draw isometric tiles in pygame
+# Actually, it is probable, but the arithmetic is quite messy.
+# Since I have created the map data already, I'll go ahead and create a highlight tile
+# and a more opaque existing tile to show where the player is on the grid
 # def highlight_tile(screen, mouse_tile_x, mouse_tile_y, tmx_data):
 #     highlight_surf = pygame.Surface((64, 32), pygame.SRCALPHA)
 #     highlight_surf.fill((255, 255, 255, 100))  # White with transparency
