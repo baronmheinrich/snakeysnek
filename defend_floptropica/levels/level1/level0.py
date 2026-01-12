@@ -1,17 +1,11 @@
 import pygame, sys, os
 from pytmx.util_pygame import load_pygame
-import pytmx
 
 # Tile width is 64px by 32px!
 # It seems silly to put the divide by 2 but it's just for sanity reasons
 TILE_HEIGHT_HALF = 64/2
 TILE_WIDTH_HALF = 32/2
 
-class Tile(pygame.sprite.Sprite):
-    def __init__(self, pos, surf, groups):
-        super().__init__(groups)
-        self.image = surf
-        self.rect = self.image.get_rect(topleft=pos)
 
 pygame.init()
 screen = pygame.display.set_mode((860, 460))
