@@ -3,17 +3,15 @@
 import base_abilities
 
 class BaseCharacter:
-    ability1 = base_abilities.Abilities()
-    ability2 = base_abilities.Abilities()
-    ability3 = base_abilities.Abilities()
-    ability4 = base_abilities.Abilities()
-    def __init__(self, name="Dummy", imagePath=None, movement=1, health=1000, energy=1000, abilityMenu=[ability1, ability2, ability3, ability4]):
+    def __init__(self, name="Dummy", imagePath=None, movement=1, health=1000, energy=1000,
+                ability1=base_abilities.Abilities(), ability2=base_abilities.Abilities(),
+                ability3=base_abilities.Abilities(), ability4=base_abilities.Abilities()):
         self.name = name
         self.imagePath = imagePath
         self.movement = movement
         self.health = health
         self.energy = energy
-        self.abilityMenu = abilityMenu
+        self.abilityMenu = [ability1, ability2, ability3, ability4]
 
     def attack(self, target):
         damage = self.energy - target.energy
