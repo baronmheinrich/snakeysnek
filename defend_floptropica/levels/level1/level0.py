@@ -10,7 +10,6 @@ GRID_HEIGHT = 460
 
 
 pygame.init()
-# clock = pygame.time.Clock()
 screen = pygame.display.set_mode((GRID_WIDTH, GRID_HEIGHT))
 
 s_width = screen.get_width() / 2
@@ -35,9 +34,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
     draw_tiles(screen, "healthy", tmx_data)
     mouse_x, mouse_y = pygame.mouse.get_pos()
-
-    # clock.tick(60)
 
     pygame.display.update()
