@@ -48,10 +48,24 @@ def draw_tiles(screen, layer_name, tmx_data):
         isometric_navigator[navi_id] = {'x': x, 'y': y, 'iso_x': iso_x, 'iso_y': iso_y, 'image': image}
         isometric_navi[(navi_id, iso_x, iso_y)] = {'id': navi_id,'x': x, 'y': y, 'image': image}
         # idgaf if += is the same as navi_id = navi_id + 1, THIS IS JUST MORE READABLE!!!!
+        
         navi_id = navi_id + 1
+        if(navi_id == 67):
+            continue
         screen.blit(image, (iso_x, iso_y))
 
+# This conversion function ALMOST works as intended.
+# The issue is that the coordinates are slightly off by 1 depending on where on the grid the mouse is clicked.
+# I think it's the way the tile height and width are calculated and divided by 2 by integer division that is causing the issue.
+# I'll need to revisit this later.
+def mouse_to_iso(mouse_x, mouse_y):
+    temp_x = mouse_x - s_width
+    temp_y = mouse_y - s_height
 
+    iso_x = (temp_x / TILE_HEIGHT_HALF + temp_y / TILE_WIDTH_HALF) // 2
+    iso_y = (temp_y / TILE_WIDTH_HALF - (temp_x / TILE_HEIGHT_HALF)) // 2
+
+    return (int(iso_x), int(iso_y))
 
 # I think I might need to have a highlight tile..... unless I can draw an isometric square and ALSO layer it ontop of the map.
 # ToDo: Add tile highlight on mouseover
@@ -66,18 +80,23 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             current_click = pygame.mouse.get_pos()
             print('Mouse button pressed at:', pygame.mouse.get_pos())
-            try:
-                print("Tile GID at position:", tmx_data.get_tile_gid(current_click[0], current_click[1], 1))
-            except Exception as e:
-                print("Error getting tile GID:", e)
+            iso_mouse = mouse_to_iso(current_click[0], current_click[1])
+            print('Converted to iso coords:', iso_mouse)
+            # print("Tile GID at position:", tmx_data.get_tile_image(iso_mouse[0], iso_mouse[1], 1))
+            
+            # try:
+            #     print("Tile GID at position:", tmx_data.get_tile_gid(current_click[0], current_click[1], 1))
+            # except Exception as e:
+            #     print("Error getting tile GID:", e)
 
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
     draw_tiles(screen, "healthy", tmx_data)
     if print_once == False:
-        pprint(isometric_navigator)
-        print('split')
+        print('print!')
+        # pprint(isometric_navigator)
+        # print('split')
         pprint(isometric_navi)
         print_once = True
     screen.blit(cupcakke_player.image, cupcakke_player.rect)
