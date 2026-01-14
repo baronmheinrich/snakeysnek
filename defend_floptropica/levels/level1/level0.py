@@ -1,4 +1,5 @@
 import pygame, sys, os
+from pprint import pprint
 from pytmx.util_pygame import load_pygame
 
 # Tile width is 64px by 32px!
@@ -7,6 +8,8 @@ TILE_HEIGHT_HALF = 64/2
 TILE_WIDTH_HALF = 32/2
 GRID_WIDTH = 860
 GRID_HEIGHT = 460
+
+print_once = False
 
 class cupcakke(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
@@ -21,6 +24,9 @@ class cupcakke(pygame.sprite.Sprite):
 pygame.init()
 screen = pygame.display.set_mode((GRID_WIDTH, GRID_HEIGHT))
 
+isometric_navigator = {}
+isometric_navi = {}
+
 s_width = screen.get_width() / 2
 s_height = screen.get_height() / 8
 
@@ -32,12 +38,19 @@ cupcakke_player = cupcakke(367, 155)
 
 tmx_data = load_pygame("defend_floptropica/levels/tiles/tilemap_level1_v2.tmx")
 
+
 def draw_tiles(screen, layer_name, tmx_data):
     layer = tmx_data.get_layer_by_name(layer_name)
+    navi_id = 0
     for x, y, image in layer.tiles():
         iso_x = (x - y) * (TILE_HEIGHT_HALF) + s_width - 30
         iso_y = (x + y) * (TILE_WIDTH_HALF) + s_height + 20
+        isometric_navigator[navi_id] = {'x': x, 'y': y, 'iso_x': iso_x, 'iso_y': iso_y, 'image': image}
+        isometric_navi[(navi_id, iso_x, iso_y)] = {'id': navi_id,'x': x, 'y': y, 'image': image}
+        # idgaf if += is the same as navi_id = navi_id + 1, THIS IS JUST MORE READABLE!!!!
+        navi_id = navi_id + 1
         screen.blit(image, (iso_x, iso_y))
+
 
 
 # I think I might need to have a highlight tile..... unless I can draw an isometric square and ALSO layer it ontop of the map.
@@ -50,11 +63,23 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            current_click = pygame.mouse.get_pos()
+            print('Mouse button pressed at:', pygame.mouse.get_pos())
+            try:
+                print("Tile GID at position:", tmx_data.get_tile_gid(current_click[0], current_click[1], 1))
+            except Exception as e:
+                print("Error getting tile GID:", e)
+
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
     draw_tiles(screen, "healthy", tmx_data)
-    
+    if print_once == False:
+        pprint(isometric_navigator)
+        print('split')
+        pprint(isometric_navi)
+        print_once = True
     screen.blit(cupcakke_player.image, cupcakke_player.rect)
     # screen.blit(cupcakke_image, (mouse_x, mouse_y))
     
