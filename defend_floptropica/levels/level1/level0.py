@@ -24,9 +24,10 @@ screen = pygame.display.set_mode((GRID_WIDTH, GRID_HEIGHT))
 s_width = screen.get_width() / 2
 s_height = screen.get_height() / 8
 
-# I REALLY want to see if it's probable to use the array, or csv, or some data structure to keep track of the tiles.
-# Using the coordinates ALL THE TIME is going to be so laboroius.
+# I REALLY want to see if it's probable to use the tmx array, csv, or some custom data structure to keep track of the tiles.
+# Using the coordinates ALL THE TIME is going to be so laboroius.  I'd rather just pass in a unique tile ID or the tile at x and y point.
 # Perhaps I can make a dictionary that keeps track of the tile coordinates and their types from the tmx_data object while drawing the map for the first time?
+# As of right now, it seems like I would need to create a wrapper of some sort to build ontop of the existing coordinate system that pygame wants me to use.
 cupcakke_player = cupcakke(367, 155)
 
 tmx_data = load_pygame("defend_floptropica/levels/tiles/tilemap_level1_v2.tmx")
